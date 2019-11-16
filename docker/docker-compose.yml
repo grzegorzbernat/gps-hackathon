@@ -1,0 +1,124 @@
+# docker-compose build
+# docker-compose up -d web
+
+version: '3.5'
+
+services:
+  mongodb:
+    image: mongo:4.0.13
+    container_name: mongodb
+    hostname: db
+    volumes:
+      - ./mongodbdata:/data/db
+      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+    command: mongod
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: flaskdb
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
+    networks:
+      services-network:
+        aliases:
+          - mongodb
+
+  flask-app:
+    container_name: flask-app
+    hostname: flask
+    environment:
+      APP_ENV: "prod"
+      APP_DEBUG: "False"
+      APP_PORT: 5000
+      MONGODB_DATABASE: flaskdb
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: password
+      MONGODB_HOSTNAME: mongodb
+    depends_on:
+      - mongodb
+    links:
+      - mongodb:mongodb
+    build:
+      context: ./flask-app
+      dockerfile: ./Dockerfile
+    volumes:
+      - './flask-app:/flask-app'
+    ports:
+      - "5000:5000"
+    networks:
+      services-network:
+        aliases:
+          - flask-network
+
+  react-app:
+    container_name: react-app
+    hostname: react
+    depends_on:
+      - flask-app
+    links:
+      - flask-app:flask-network
+    build:
+      context: ./react-app
+      dockerfile: ./Dockerfile
+    volumes:
+      - './react-app:/react-app'
+    # command: bash -c "npm start"
+    ports:
+      - "3000:3000"
+    networks:
+      services-network:
+        aliases:
+          - react-app
+
+  angular-app:
+    container_name: angular-app
+    hostname: angular
+    depends_on:
+      - flask-app
+    links:
+      - flask-app:flask-network
+    build:
+      context: ./angular-app
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./angular-app:/angular-app"
+    ports:
+      - "4200:4200"
+    networks:
+      services-network:
+        aliases:
+          - angular-app
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    hostname: nginx
+    volumes:
+      - ./nginx/sites-enabled:/etc/nginx/conf.d:ro
+      - ./logs:/var/log/nginx
+    links:
+      - mongodb:mongodb
+      - flask-app:flask-network
+      - react-app:react-network
+      - angular-app:angular-network
+    ports:
+      - "8888:8080"
+      - "443:443"
+    restart: on-failure:5
+    networks:
+      services-network:
+        aliases:
+           - nginx-network
+
+volumes:
+  mongodbdata:
+    driver: local
+
+
+networks:
+  services-network:
+    name: services-network
+    driver: bridge
