@@ -24,7 +24,8 @@ class MONOGO_DB(metaclass=Singleton):
     def __init__(self):
         try:
             # ...
-            self.MONGODB_URL = 'mongodb://127.0.0.1:27017/'
+            # self.MONGODB_URL = 'mongodb://127.0.0.1:27017/'
+            self.MONGODB_URL = 'mongodb://superuser:AIForce1MSS228@178.128.206.115:2020/'
             logger.debug('<class {}>'.format(__name__))
 
             # ...
@@ -53,8 +54,8 @@ class MONOGO_DB(metaclass=Singleton):
 
 
     def get_location_db(self):
-        # return self.get_collection('hackathon', 'locations')
-        return self.get_collection('hackathon', 'places')
+        return self.get_collection('hackathon', 'locations')
+        # return self.get_collection('hackathon', 'places')
 
 
 
