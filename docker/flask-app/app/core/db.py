@@ -145,3 +145,21 @@ class MONOGO_DB(metaclass=Singleton):
         self.get_location_db().delete_one({'_id': ObjectId(_id)})
         return 'LOCATION DELETED'
 
+
+    @exceptions(logger, 'LOCATION NOT UPDATED')
+    def vote_location(self, _id, data):
+        logger.info(f'update_location(_id={_id}, data=...)')
+
+        self.get_location_db().update_one(
+            {'_id': ObjectId(_id)},
+            { "$inc": {
+                'wozek': data['wozek'],
+                'sluch': data['sluch'],
+                'wzrok': data['wzrok'],
+                'ruch': data['ruch'],
+                'ciaza': data['ciaza'],
+                'dziecko': data['dziecko'],
+                'padaczka,': data['padaczka'] 
+            } 
+            })
+        return 'LOCATION UPDATED'

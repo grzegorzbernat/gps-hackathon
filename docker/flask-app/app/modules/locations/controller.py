@@ -47,3 +47,9 @@ class LocationController(object):
     def delete(self, _id):
         logger.info('delete(_id={_id})'.format(_id=_id))
         return self.mongo_db.delete_location(_id)
+
+
+    @exceptions(logger, 'vote(data=...)')
+    def vote(self, _id, data):
+        logger.info('vote(_id={_id}, data={data})'.format(data=utils.json_dump(data), _id=_id))
+        return self.mongo_db.vote_location(_id, data)

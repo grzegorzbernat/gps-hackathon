@@ -76,3 +76,16 @@ class LocationByCategory(Resource):
     def get(self, category):
         '''Get location by category'''
         return controller.get_by_category(category)
+
+
+@api.route('/<string:id>/vote')
+@api.response(404, 'Location not found')
+@api.param('vote', 'The location vote')
+class LocationsVotes(Resource):
+    @logge(logger, api)
+    @api.doc('location_vote')
+    @api.expect(factor_model(api))
+    @api.marshal_with(factor_model(api), code=201)
+    def post(self, id):
+        '''Location vote'''
+        return controller.vote(id, api.payload), 201
