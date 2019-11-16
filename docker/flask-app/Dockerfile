@@ -12,4 +12,4 @@ RUN cd /flask-app/
 
 EXPOSE 5000
 
-CMD ["python", "hello.py"]
+CMD ["python3", "run_app.py"]
