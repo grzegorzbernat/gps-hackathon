@@ -1,5 +1,52 @@
-<div class="row">
-  <nb-card>
-    <nb-card-body>Hello from ngx-admin sandbox project.</nb-card-body>
-  </nb-card>
+<div class="dashboard row">
+    <div class="col-md-12 col-lg-6 col-xxxl-6">
+        <nb-card class="list-card">
+            <nb-card-header>Najnowsze zgłoszenia</nb-card-header>
+            <nb-card-body>
+                <div class="row table-item" *ngFor="let alert of alerts; let i = index">
+                    <div class="col-md-4">
+                        {{i + 1}}
+                    </div>
+                    <div class="col-md-4">
+                        {{alert.category}}
+                    </div>
+                    <div class="col-md-4">
+                        {{alert.text}}
+                    </div>
+                </div>
+            </nb-card-body>
+            <nb-card-footer>
+                <button nbButton fullWidth status="primary">Więcej</button>
+            </nb-card-footer>
+        </nb-card>
+    </div>
+
+    <div class="col-md-12 col-lg-6 col-xxxl-6">
+        <nb-card class="list-card">
+            <nb-card-header>Najnowsze komentarze</nb-card-header>
+            <nb-card-body>
+                <div class="row table-item" *ngFor="let comment of comments; let i = index">
+                    <div class="col-md-4">
+                        {{i + 1}}
+                    </div>
+                    <div class="col-md-4">
+                        {{comment.category}}
+                    </div>
+                    <div class="col-md-4">
+                        {{comment.text}}
+                    </div>
+                </div>
+            </nb-card-body>
+            <nb-card-footer>
+                <button nbButton fullWidth status="primary">Więcej</button>
+            </nb-card-footer>
+        </nb-card>
+    </div>
 </div>
+
+<nb-card>
+    <nb-card-header>Lokalizacje</nb-card-header>
+    <nb-card-body>
+        <div leaflet [leafletOptions]="options"></div>
+    </nb-card-body>
+</nb-card>
