@@ -1,7 +1,14 @@
 export const toggleMenu = val => {
-  console.log("click", val);
   return {
     type: "TOGGLE_MENU",
     shouldBeOn: val
+  };
+};
+
+export const saveCategory = (name, isToggled) => {
+  return {
+    type: "TOGGLE_CATEGORY",
+    name: name,
+    isToggled: isToggled
   };
 };
