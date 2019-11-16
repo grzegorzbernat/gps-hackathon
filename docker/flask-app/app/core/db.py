@@ -9,7 +9,6 @@ from app.core.decorator import exceptions
 logger = Logger(__name__).get_looger()
 
 
-
 class Singleton(type):
     def __init__(cls, name, bases, attrs, **kwargs):
         super().__init__(name, bases, attrs)
@@ -25,11 +24,14 @@ class MONOGO_DB(metaclass=Singleton):
     def __init__(self):
         try:
             # ...
-            self.MONGODB_URL = 'mongodb://127.0.0.1:27017/'
+            # self.MONGODB_URL = 'mongodb://127.0.0.1:27017/'
+            self.MONGODB_URL = 'mongodb://superuser:AIForce1MSS228@178.128.206.115:2020/'
             logger.debug('<class {}>'.format(__name__))
 
             # ...
             self.mongo = pymongo.MongoClient(self.MONGODB_URL, connect=False)
+            
+            # self.mongo.get_database('hackathon').get_collection('users').create_index([("email", pymongo.ASCENDING)], unique=True)
         except Exception as err:
             logger.exception('__init__()  ==>  {err}.'.format(err=err))
 
@@ -51,6 +53,11 @@ class MONOGO_DB(metaclass=Singleton):
         return self.get_collection('hackathon', 'users')
 
 
+    def get_location_db(self):
+        return self.get_collection('hackathon', 'locations')
+        # return self.get_collection('hackathon', 'places')
+
+
 
     @exceptions(logger, 'NO USERS')
     def get_all_users(self):
@@ -62,10 +69,20 @@ class MONOGO_DB(metaclass=Singleton):
         return self.get_user_db().find_one({'_id': ObjectId(_id)})
 
 
+    @exceptions(logger, 'get_all_users_email()')
+    def get_all_users_email(self):
+        return self.get_user_db().distinct('email')
+
+
     @exceptions(logger, 'USER NOT ADDED')
     def add_user(self, data):
         logger.info('add_user(data=...)')
         del data['_id']
+
+        if data['email'] in self.get_all_users_email():
+            error_msg = 'The email is used !!'
+            raise Exception(error_msg)
+            return error_msg
 
         self.get_user_db().insert_one(data)
         return 'USER ADDED'
@@ -88,36 +105,61 @@ class MONOGO_DB(metaclass=Singleton):
         return 'USER DELETED'
 
 
+    @exceptions(logger, 'NO LOCATIONS')
+    def get_all_locations(self):
+        return list(self.get_location_db().find({}))
 
 
+    @exceptions(logger, 'NO LOCATION FOUND')
+    def get_locations_by_id(self, _id):
+        return self.get_location_db().find_one({'_id': ObjectId(_id)})
 
 
-DB_OFFER = [
-    {
-        'id': '32f2bhj',
-        'title': 'offer 1',
-        'description': 'description',
-        'created': '10/10/2010',
-        'edited': '11/10/2010',
-    }
-]
+    @exceptions(logger, 'NO LOCATION FOUND')
+    def get_locations_by_category(self, category):
+        return list(self.get_location_db().find({'name': category}))
 
 
+    @exceptions(logger, 'LOCATION NOT ADDED')
+    def add_location(self, data):
+        logger.info('add_location(data=...)')
+        del data['_id']
 
-@exceptions(logger, 'get_all_offers(...)', [])
-def get_all_offers():
-    logger.info('get_all_offers()')
-    return DB_OFFER
-
-
-@exceptions(logger, 'get_offer(...)', {})
-def get_offer(id):
-    logger.info('get_offer()')
-    return [offer for offer in DB_OFFER if offer['id'] == id][0]
+        self.get_location_db().insert_one(data)
+        return 'LOCATION ADDED'
 
 
-@exceptions(logger, 'OFFER NOT ADDED')
-def add_offer(data):
-    logger.info('add_offer(data=...)')
-    DB_OFFER.append(data)
-    return 'OFFER ADDED'
+    @exceptions(logger, 'LOCATION NOT UPDATED')
+    def update_location(self, _id, data):
+        logger.info(f'update_location(_id={_id}, data=...)')
+        del data['_id']
+
+        self.get_location_db().update_one({'_id': ObjectId(_id)}, { "$set": data })
+        return 'LOCATION UPDATED'
+
+
+    @exceptions(logger, 'LOCATION NOT DELETED')
+    def delete_location(self, _id):
+        logger.info(f'delete_location(_id={_id})')
+
+        self.get_location_db().delete_one({'_id': ObjectId(_id)})
+        return 'LOCATION DELETED'
+
+
+    @exceptions(logger, 'LOCATION NOT UPDATED')
+    def vote_location(self, _id, data):
+        logger.info(f'update_location(_id={_id}, data=...)')
+
+        self.get_location_db().update_one(
+            {'_id': ObjectId(_id)},
+            { "$inc": {
+                'wozek': data['wozek'],
+                'sluch': data['sluch'],
+                'wzrok': data['wzrok'],
+                'ruch': data['ruch'],
+                'ciaza': data['ciaza'],
+                'dziecko': data['dziecko'],
+                'padaczka,': data['padaczka'] 
+            } 
+            })
+        return 'LOCATION UPDATED'
