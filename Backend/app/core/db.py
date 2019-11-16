@@ -26,15 +26,15 @@ class MONOGO_DB(metaclass=Singleton):
         try:
             # ...
             self.MONGODB_URL = 'mongodb://127.0.0.1:27017/'
-            self.logger = Logger(__name__).get_looger()
-            self.logger.debug('<class {}>'.format(__name__))
+            logger.debug('<class {}>'.format(__name__))
 
             # ...
             self.mongo = pymongo.MongoClient(self.MONGODB_URL, connect=False)
         except Exception as err:
-            self.logger.exception('__init__()  ==>  {err}.'.format(err=err))
+            logger.exception('__init__()  ==>  {err}.'.format(err=err))
 
 
+    @exceptions(logger, 'get_db()')
     def get_db(self, name):
         return self.mongo.get_database(name)
 
@@ -47,25 +47,50 @@ class MONOGO_DB(metaclass=Singleton):
         return self.mongo
 
 
+    def get_user_db(self):
+        return self.get_collection('hackathon', 'users')
+
+
+
+    @exceptions(logger, 'NO USERS')
     def get_all_users(self):
-        return list(self.get_collection('hackathon', 'users').find({}))
+        return list(self.get_user_db().find({}))
 
 
+    @exceptions(logger, 'NO USER FOUND')
     def get_user(self, _id):
-        return list(self.get_collection('hackathon', 'users').find_one({'_id': ObjectId(_id)}))
+        return self.get_user_db().find_one({'_id': ObjectId(_id)})
+
+
+    @exceptions(logger, 'USER NOT ADDED')
+    def add_user(self, data):
+        logger.info('add_user(data=...)')
+        del data['_id']
+
+        self.get_user_db().insert_one(data)
+        return 'USER ADDED'
+
+
+    @exceptions(logger, 'USER NOT UPDATED')
+    def update_user(self, _id, data):
+        logger.info(f'update_user(_id={_id}, data=...)')
+        del data['_id']
+
+        self.get_user_db().update_one({'_id': ObjectId(_id)}, { "$set": data })
+        return 'USER UPDATED'
+
+
+    @exceptions(logger, 'USER NOT DELETED')
+    def delete_user(self, _id):
+        logger.info(f'delete_user(_id={_id})')
+
+        self.get_user_db().delete_one({'_id': ObjectId(_id)})
+        return 'USER DELETED'
 
 
 
 
-DB = [
-    {
-        'id': '32f2bhj',
-        'name': 'salem',
-        'email': 'sal@test.pl',
-        'password': 'salem',
-    }
 
-]
 
 DB_OFFER = [
     {
@@ -77,44 +102,6 @@ DB_OFFER = [
     }
 ]
 
-
-
-@exceptions(logger, 'get_all_users()', [])
-def get_all_users():
-    logger.info('get_all_users()')
-    return DB
-
-
-@exceptions(logger, 'get_user()', {})
-def get_user(id):
-    logger.info(f'get_user(id={id})')
-    return [user for user in DB if user['id'] == id][0]
-
-
-@exceptions(logger, 'USER NOT ADDED')
-def add_user(data):
-    logger.info('add_user(data=...)')
-    DB.append(data)
-    return 'USER ADDED'
-
-
-@exceptions(logger, 'USER NOT UPDATED')
-def update_user(id, data):
-    logger.info(f'update_user(id={id}, data=...)')
-    for user in DB:
-        if user['id'] == id:
-            user['name'] = data['name']
-            user['email'] = data['email']
-            user['password'] = data['password']
-            break
-    return 'USER UPDATED'
-
-
-@exceptions(logger, 'USER NOT DELETED')
-def delete_user(id):
-    logger.info(f'delete_user(id={id})')
-    DB[:] = [user for user in DB if user.get('id') != id]
-    return 'USER DELETED'
 
 
 @exceptions(logger, 'get_all_offers(...)', [])
