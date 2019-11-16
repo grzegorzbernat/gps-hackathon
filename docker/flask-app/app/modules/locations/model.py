@@ -20,9 +20,10 @@ def factor_model(api):
 
         # ...
         'geometry': fields.Nested(
-            api.model('info', {
+            api.model('xx', {
                 'type': fields.String(attribute='type'),
-                'cordinates': fields.List(fields.Float, attribute='cordinates'),
+                'coordinates': fields.List(fields.Float, attribute='coordinates')
+                # 'cordinates': fields.List(fields.Float, attribute='cordinates'),
             }),
             # required=True,
             description='Location geometry'
@@ -31,21 +32,21 @@ def factor_model(api):
         'supported': fields.List(fields.String, description='Location supported'),
 
         # ...
-        'votes': fields.List(
-            fields.Nested(
-                api.model('sample', {
-                    '0': fields.Integer(attribute='0'),
-                    '1': fields.Integer(attribute='1'),
-                    '2': fields.Integer(attribute='2'),
-                    '3': fields.Integer(attribute='3'),
-                    '4': fields.Integer(attribute='4'),
-                    '5': fields.Integer(attribute='5'),
-                    'supported_for': fields.String(attribute='supported_for'),
-                }),
-                # required=True,
-                description='Location votes'
-            ),
-            attribute='votes'
-        )
+        # 'votes': fields.List(
+        #     fields.Nested(
+        #         api.model('sample', {
+        #             '0': fields.Integer(attribute='0'),
+        #             '1': fields.Integer(attribute='1'),
+        #             '2': fields.Integer(attribute='2'),
+        #             '3': fields.Integer(attribute='3'),
+        #             '4': fields.Integer(attribute='4'),
+        #             '5': fields.Integer(attribute='5'),
+        #             'supported_for': fields.String(attribute='supported_for'),
+        #         }),
+        #         # required=True,
+        #         description='Location votes'
+        #     ),
+        #     attribute='votes'
+        # )
     })
 
