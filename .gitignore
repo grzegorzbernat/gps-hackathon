@@ -167,3 +167,4 @@ nohup.out
 trainData/
 .venv36
 docs/*
+.logs/*
