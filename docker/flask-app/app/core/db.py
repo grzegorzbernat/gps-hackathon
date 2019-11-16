@@ -117,7 +117,7 @@ class MONOGO_DB(metaclass=Singleton):
 
     @exceptions(logger, 'NO LOCATION FOUND')
     def get_locations_by_category(self, category):
-        return list(self.get_location_db().find({'supported': category}))
+        return list(self.get_location_db().find({'name': category}))
 
 
     @exceptions(logger, 'LOCATION NOT ADDED')

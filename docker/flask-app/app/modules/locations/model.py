@@ -5,6 +5,7 @@ def factor_model(api):
     return api.model('Location', {
         '_id': fields.String(readOnly=True, description='Location unique identifier'),
         'type': fields.String(required=False, description='Location type'),
+        'name': fields.String(required=False, description='Location type'),
 
         # ...
         'properties': fields.Nested(
@@ -23,13 +24,20 @@ def factor_model(api):
             api.model('xx', {
                 'type': fields.String(attribute='type'),
                 'coordinates': fields.List(fields.Float, attribute='coordinates')
-                # 'cordinates': fields.List(fields.Float, attribute='cordinates'),
             }),
             # required=True,
             description='Location geometry'
         ),
 
-        'supported': fields.List(fields.String, description='Location supported'),
+        'wozek': fields.Integer(attribut='wozek'),
+        'sluch': fields.Integer(attribut='sluch'),
+        'wzrok': fields.Integer(attribut='wzrok'),
+        'ruch': fields.Integer(attribut='ruch'),
+        'ciaza': fields.Integer(attribut='ciaza'),
+        'dziecko': fields.Integer(attribut='dziecko'),
+        'padaczka': fields.Integer(attribut='padaczka'),
+
+        # 'supported': fields.List(fields.String, description='Location supported'),
 
         # ...
         # 'votes': fields.List(
