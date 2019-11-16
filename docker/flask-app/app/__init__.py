@@ -5,6 +5,7 @@ from flask_restplus import Api
 from app.config import configure_app
 from app.modules.users.route import api as user_api
 from app.modules.offers.route import api as offer_api
+from app.modules.locations.route import api as location_api
 
 
 
@@ -44,6 +45,7 @@ class MyApp():
         api = Api(self.app, version='1.0', title='Flask App API', description='A simple Falsk App API',)
         api.add_namespace(user_api)
         api.add_namespace(offer_api)
+        api.add_namespace(location_api)
 
 
     def create_app(self):

@@ -165,3 +165,7 @@ trainData/
 .venv36
 docs/*
 .logs/
+
+
+
+test/
