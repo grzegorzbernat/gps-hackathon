@@ -145,9 +145,6 @@ pip-selfcheck.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# logs
-microbots.log
-~
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
@@ -167,4 +164,4 @@ nohup.out
 trainData/
 .venv36
 docs/*
-.logs/*
+.logs/

@@ -27,7 +27,7 @@ class Logger:
 
             # ...
             # TODO SET THE PATHS IN CONFIG FILE ...
-            file_handler = logging.FileHandler('/home/sal/Python/Hackathon/gps-hackathon/.logs/info.log')
+            file_handler = logging.FileHandler('/home/sal/Python/Hackathon/gps-hackathon/docker/flask-app/.logs/info.log')
             # file_handler.setLevel(logging.INFO)
             file_handler.setFormatter(formatter)
 

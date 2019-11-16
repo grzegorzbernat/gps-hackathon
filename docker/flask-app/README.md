@@ -22,11 +22,20 @@ Python / Flask app
     $ pip install -r requirements.txt
   ```
 
+### configs
+
++ flask-app/app/.config.conf
++ flask-app/app/.logging.conf
++ flask-app/app/core/logger.py
+
+
++ flask-app/app/core/db.py
+
 ### Run server
   ```
-    $ python hello.py
+    $ make run-app
   ```
 
 ### Server urls
 
-  - http://localhost:5000
+  - http://localhost:7790
