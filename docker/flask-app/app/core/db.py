@@ -9,7 +9,6 @@ from app.core.decorator import exceptions
 logger = Logger(__name__).get_looger()
 
 
-
 class Singleton(type):
     def __init__(cls, name, bases, attrs, **kwargs):
         super().__init__(name, bases, attrs)
@@ -30,6 +29,8 @@ class MONOGO_DB(metaclass=Singleton):
 
             # ...
             self.mongo = pymongo.MongoClient(self.MONGODB_URL, connect=False)
+            
+            # self.mongo.get_database('hackathon').get_collection('users').create_index([("email", pymongo.ASCENDING)], unique=True)
         except Exception as err:
             logger.exception('__init__()  ==>  {err}.'.format(err=err))
 
@@ -62,10 +63,20 @@ class MONOGO_DB(metaclass=Singleton):
         return self.get_user_db().find_one({'_id': ObjectId(_id)})
 
 
+    @exceptions(logger, 'get_all_users_email()')
+    def get_all_users_email(self):
+        return self.get_user_db().distinct('email')
+
+
     @exceptions(logger, 'USER NOT ADDED')
     def add_user(self, data):
         logger.info('add_user(data=...)')
         del data['_id']
+
+        if data['email'] in self.get_all_users_email():
+            error_msg = 'The email is used !!'
+            raise Exception(error_msg)
+            return error_msg
 
         self.get_user_db().insert_one(data)
         return 'USER ADDED'
