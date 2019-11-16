@@ -22,7 +22,7 @@ def factor_model(api):
         'geometry': fields.Nested(
             api.model('info', {
                 'type': fields.String(attribute='type'),
-                'coordinates': fields.List(fields.Float, attribute='coordinates'),
+                'cordinates': fields.List(fields.Float, attribute='cordinates'),
             }),
             # required=True,
             description='Location geometry'

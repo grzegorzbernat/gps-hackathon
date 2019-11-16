@@ -25,6 +25,12 @@ class LocationController(object):
         return self.mongo_db.get_all_locations()
 
 
+    @exceptions(logger, 'get_by_category(category=...)')
+    def get_by_category(self, category=None):
+        logger.info(f'get_by_category(category={category})')
+        return self.mongo_db.get_locations_by_category(category)
+
+
     @exceptions(logger, 'create(data=...)')
     def create(self, data):
         logger.info('create(data={data})'.format(data=utils.json_dump(data)))

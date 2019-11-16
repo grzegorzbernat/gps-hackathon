@@ -63,3 +63,16 @@ class Location(Resource):
     def put(self, id):
         '''Update a location given its identifier'''
         return controller.update(id, api.payload)
+
+
+
+@api.route('/category/<string:category>')
+@api.response(404, 'Location not found')
+@api.param('category', 'The location category')
+class LocationByCategory(Resource):
+    @logge(logger, api)
+    @api.doc('locationby_category')
+    @api.marshal_with(factor_model(api))
+    def get(self, category):
+        '''Get location by category'''
+        return controller.get_by_category(category)
