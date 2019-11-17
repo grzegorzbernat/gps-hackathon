@@ -1,0 +1,12 @@
+.libPhoto {
+  width: 400px;
+  height: 200px;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 600px) {
+  .libPhoto {
+    width: 250px;
+    height: 150px;
+  }
+}

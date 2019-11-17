@@ -33,6 +33,12 @@ const Edit = () => {
     },
     button: {
       margin: theme.spacing(4)
+    },
+    icon: {
+      [theme.breakpoints.up("md")]: {
+        width: "3em",
+        height: "2em"
+      }
     }
   }));
 
@@ -49,19 +55,19 @@ const Edit = () => {
             name={"Dysfunkcja narządu słuchu"}
             redux_name={"sluch"}
           >
-            <VoiceOverOffIcon />
+            <VoiceOverOffIcon className={classes.icon} />
           </SingleCategory>
           <SingleCategory
             name={"Dysfunkcja narządu wzroku"}
             redux_name={"wzrok"}
           >
-            <VisibilityIcon />
+            <VisibilityIcon className={classes.icon} />
           </SingleCategory>
           <SingleCategory name={"Dysfunkcja narządu ruchu"} redux_name={"ruch"}>
-            <AccessibilityNewIcon />
+            <AccessibilityNewIcon className={classes.icon} />
           </SingleCategory>
           <SingleCategory name={"Poruszanie sie na wózku"} redux_name={"wozek"}>
-            <AccessibleIcon />
+            <AccessibleIcon className={classes.icon} />
           </SingleCategory>
         </Grid>
         <Grid
@@ -73,13 +79,13 @@ const Edit = () => {
           redux_name={"wozek"}
         >
           <SingleCategory name={"Kobieta w ciąży"} redux_name="ciaza">
-            <PregnantWomanIcon />
+            <PregnantWomanIcon className={classes.icon} />
           </SingleCategory>
           <SingleCategory name={"Osoba z dzieckiem"} redux_name="dziecko">
-            <ChildFriendlyIcon />
+            <ChildFriendlyIcon className={classes.icon} />
           </SingleCategory>
           <SingleCategory name={"Padaczka"} redux_name="padaczka">
-            <TransferWithinAStationIcon />
+            <TransferWithinAStationIcon className={classes.icon} />
           </SingleCategory>
         </Grid>
         <Link to="/map">

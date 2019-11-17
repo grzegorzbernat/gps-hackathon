@@ -8,7 +8,10 @@ const initialState = {
     ciaza: false,
     dziecko: false,
     padaczka: false
-  }
+  },
+  isModalOpened: false,
+  clickedWaypoint: null,
+  location: "biblioteki"
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,8 +22,15 @@ const reducer = (state = initialState, action) => {
     case "TOGGLE_CATEGORY":
       const currentCategory = state.categories;
       currentCategory[action.name] = action.isToggled;
-      console.log(currentCategory);
       return { ...state, categories: currentCategory };
+    case "SET_LOCATION":
+      return { ...state, location: action.name };
+    case "MODAL_ACTION":
+      return {
+        ...state,
+        isModalOpened: action.shouldBeOn,
+        clickedWaypoint: action.waypoint
+      };
     default:
       return state;
   }

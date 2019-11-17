@@ -6,6 +6,8 @@ import Header from "../components/header/header";
 import Register from "../components/accountManagment/register";
 import Edit from "../components/accountManagment/edit";
 import Info from "../components/info/info";
+import Modal from "../components/modal/modal";
+import Locations from "../components/locations/locations";
 
 const App = () => {
   return (
@@ -27,6 +29,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
+      <Modal />
     </>
   );
 };

@@ -1,23 +1,29 @@
 import React from "react";
-import { Marker, Popup } from "react-leaflet";
+import { Marker } from "react-leaflet";
 import "proj4";
 import GoodIcon from "./icons/goodIcon";
 import BadIcon from "./icons/badIcon";
+import { handleModal } from "../../../store/action";
+import { connect } from "react-redux";
 
-const SingleMarker = ({ waypoint }) => {
+const SingleMarker = ({ waypoint, dispatchHandleModal }) => {
   const { position, rating, name, id } = waypoint;
-  console.log(rating);
   const customIcon = rating > 0 ? GoodIcon : BadIcon;
 
   return (
     <Marker
       position={position}
       icon={customIcon}
-      onClick={() => {
-        console.log("test");
-      }}
+      onClick={() => dispatchHandleModal(true, waypoint)}
     ></Marker>
   );
 };
 
-export default SingleMarker;
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchHandleModal: (shouldBeOn, waypoint) =>
+      dispatch(handleModal(shouldBeOn, waypoint))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SingleMarker);
