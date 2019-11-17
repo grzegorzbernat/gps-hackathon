@@ -4,6 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { connect } from "react-redux";
 import { toggleMenu } from "../../../store/action";
 import { Link } from "react-router-dom";
+import "./menu.css";
 
 const MenuView = ({ isToggled, toggleMenuHandle }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);

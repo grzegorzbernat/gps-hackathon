@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccessibleForward from "@material-ui/icons/AccessibleForward";
-
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Menu from "./menu/menu";
 
@@ -54,7 +54,9 @@ const Header = ({ toggleMenuHandle }) => {
           </Typography>
           <Button color="inherit">Polski</Button>
           <Button color="inherit">English</Button>
-          <Button color="inherit">Login</Button>
+          <Link to="/register">
+            <Button color="inherit">Rejestracja</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
