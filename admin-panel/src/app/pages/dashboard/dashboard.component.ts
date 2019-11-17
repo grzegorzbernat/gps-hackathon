@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import * as L from 'leaflet';
 import 'style-loader!leaflet/dist/leaflet.css';
+import {Router} from '@angular/router';
 
 interface UserAlert {
     id: string;
@@ -33,7 +34,7 @@ export class DashboardComponent {
         center: L.latLng({lat: 50.8660773, lng: 20.6285677}),
     };
 
-    constructor() {
+    constructor(private router: Router) {
         this.alerts = [
             {
                 id: '1',
@@ -58,7 +59,7 @@ export class DashboardComponent {
                 category: 'Narząd wzroku',
                 text: 'Ogiński z Bonapartą. tu mieszkał? Stary stryj nie wyszli witać, ale nigdzie nie jedli. Stojąc i z córkami. Młodzież poszła.',
                 mark: -4,
-    },
+            },
             {
                 id: '2',
                 category: 'Narząd ruchu',
@@ -99,5 +100,9 @@ export class DashboardComponent {
                 mark: 4,
             },
         ];
+    }
+
+    goToAlert() {
+        this.router.navigate((['/pages/alert/user']));
     }
 }

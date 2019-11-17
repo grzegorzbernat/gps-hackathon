@@ -8,6 +8,7 @@ import {PagesRoutingModule} from './pages-routing.module';
 import {UsersModule} from './users/users.module';
 import {LocationsModule} from './locations/locations.module';
 import {LocationsStatsModule} from './locations-stats/locations-stats.module';
+import {UserAlertModule} from './user-alert/user-alert.module';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import {LocationsStatsModule} from './locations-stats/locations-stats.module';
         DashboardModule,
         UsersModule,
         LocationsModule,
-        LocationsStatsModule
+        LocationsStatsModule,
+        UserAlertModule
     ],
     declarations: [
         PagesComponent,

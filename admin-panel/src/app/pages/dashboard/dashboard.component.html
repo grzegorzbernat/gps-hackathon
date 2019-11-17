@@ -4,7 +4,7 @@
             <nb-card-header>Najnowsze zgłoszenia</nb-card-header>
             <nb-card-body>
                 <div class="row table-item" *ngFor="let alert of alerts; let i = index">
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         {{i + 1}}
                     </div>
                     <div class="col-md-4 wrapped">
@@ -16,6 +16,9 @@
                     <div class="col-md-2 wrapped">
                         <div class="mark" [class.red]="alert.mark < 0"
                              [class.green]="alert.mark >0">{{alert.mark}}</div>
+                    </div>
+                    <div class="col-md-1" style="cursor: pointer" (click)="goToAlert()">
+                        <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
                     </div>
                 </div>
             </nb-card-body>
@@ -30,14 +33,17 @@
             <nb-card-header>Najnowsze komentarze</nb-card-header>
             <nb-card-body>
                 <div class="row table-item" *ngFor="let comment of comments; let i = index">
-                    <div class="col-md-4">
+                    <div class="col-md-1">
                         {{i + 1}}
                     </div>
                     <div class="col-md-4 wrapped">
                         {{comment.category}}
                     </div>
-                    <div class="col-md-4 wrapped">
+                    <div class="col-md-6 wrapped">
                         {{comment.text}}
+                    </div>
+                    <div class="col-md-1">
+                        <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
                     </div>
                 </div>
             </nb-card-body>

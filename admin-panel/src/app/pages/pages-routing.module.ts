@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {UsersComponent} from './users/users.component';
 import {LocationsComponent} from './locations/locations.component';
 import {LocationsStatsComponent} from './locations-stats/locations-stats.component';
+import {UserAlertComponent} from './user-alert/user-alert.component';
 
 const routes: Routes = [{
   path: '',
@@ -26,6 +27,10 @@ const routes: Routes = [{
     {
       path: 'locations/stats',
       component: LocationsStatsComponent,
+    },
+    {
+      path: 'alert/user',
+      component: UserAlertComponent,
     },
     {
       path: '',
