@@ -1,9 +1,14 @@
 <nb-card>
     <nb-card-header>
-        Statystyki
+        Statystyka dopasowania
+        <nb-select placeholder="Wybierz typ" [(selected)]="selectedItem" (selectedChange)="onSelect($event)" style="position: absolute; right: 50px">
+            <nb-option [value]="'LIB'">Biblioteki</nb-option>
+            <nb-option [value]="'SOCIAL'">Pomoc społeczna</nb-option>
+        </nb-select>
     </nb-card-header>
 
     <nb-card-body>
-        sths
+        <div echarts [options]="libOptions" class="echart" *ngIf="selectedItem === 'LIB'"></div>
+        <div echarts [options]="socialOptions" class="echart" *ngIf="selectedItem === 'SOCIAL'"></div>
     </nb-card-body>
 </nb-card>
