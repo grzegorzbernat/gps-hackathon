@@ -39,23 +39,12 @@ const Header = ({ toggleMenuHandle }) => {
       <AppBar position="static">
         <Menu />
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleMenuHandle}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h5" className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
             <AccessibleForward className={classes.appIcon} />
             Przyjazne Kielce
           </Typography>
-          <Button color="inherit">Polski</Button>
-          <Button color="inherit">English</Button>
-          <Link to="/register">
-            <Button color="inherit">Rejestracja</Button>
+          <Link to="/edit_account">
+            <Button color="inherit">Kategoria</Button>
           </Link>
         </Toolbar>
       </AppBar>

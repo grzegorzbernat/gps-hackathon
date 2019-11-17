@@ -13,13 +13,23 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1),
     textAlign: "center",
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+
+    [theme.breakpoints.up("md")]: {
+      height: "200px",
+      paddingTop: "50px",
+      background: "rgb(207, 227, 244)"
+    }
   },
   clicked: {
     background: "#3f51b5",
     padding: theme.spacing(1),
     textAlign: "center",
-    color: "white"
+    color: "white",
+    [theme.breakpoints.up("md")]: {
+      height: "200px",
+      paddingTop: "50px"
+    }
   }
 }));
 
@@ -37,7 +47,8 @@ const SingleCategory = ({
   return (
     <Grid
       item
-      xs={3}
+      xs={6}
+      md={3}
       onClick={() => {
         const newVal = !categories[redux_name];
         saveCategory(redux_name, newVal);
@@ -46,7 +57,7 @@ const SingleCategory = ({
     >
       <Paper className={classOfTab}>
         {children}
-        <Typography component="h2" variant="subtitle1">
+        <Typography component="h2" variant="subtitle2">
           {name}
         </Typography>
       </Paper>

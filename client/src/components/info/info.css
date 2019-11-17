@@ -5,3 +5,10 @@
   margin-top: 25px;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
 }
+
+@media (max-width: 600px) {
+  .ourImage {
+    width: 200px;
+    height: 100px;
+  }
+}
