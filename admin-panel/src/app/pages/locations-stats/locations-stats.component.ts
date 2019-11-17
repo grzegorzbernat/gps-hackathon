@@ -17,6 +17,8 @@ export class LocationsStatsComponent implements AfterViewInit, OnDestroy {
     socialOptions: any = {};
     themeSubscription: any;
 
+    libGreenData: [];
+
     constructor(private theme: NbThemeService) {
     }
 
@@ -27,6 +29,13 @@ export class LocationsStatsComponent implements AfterViewInit, OnDestroy {
             const echarts: any = config.variables.echarts;
 
             this.libOptions = {
+                title: {
+                    text: 'Dopasowanie bibliotek do potrzeb',
+                    left: 'center',
+                    textStyle: {
+                        color: '#fff',
+                    }
+                },
                 backgroundColor: echarts.bg,
                 color: [colors.primaryLight],
                 tooltip: {
@@ -91,15 +100,83 @@ export class LocationsStatsComponent implements AfterViewInit, OnDestroy {
                 ],
                 series: [
                     {
-                        name: 'Score',
+                        name: 'Stopień dopasowania',
                         type: 'bar',
                         barWidth: '60%',
-                        data: [3, 1, -3, 4, 3, 5, 3, 3, -4, 3],
+                        data: [
+                            {
+                                value: 3,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: -2,
+                                itemStyle: {
+                                    color: '#d50000'
+                                },
+                            },
+                            {
+                                value: 1,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: 5,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: -4,
+                                itemStyle: {
+                                    color: '#d50000'
+                                },
+                            },
+                            {
+                                value: -5,
+                                itemStyle: {
+                                    color: '#d50000'
+                                },
+                            },
+                            {
+                                value: 3,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: 1,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: 5,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: -2,
+                                itemStyle: {
+                                    color: '#d50000'
+                                },
+                            }
+                        ],
                     },
                 ],
             };
 
             this.socialOptions = {
+                title: {
+                    text: 'Dopasowanie budynków pomocy społęcznej do potrzeb',
+                    left: 'center',
+                    textStyle: {
+                        color: '#fff',
+                    }
+                },
                 backgroundColor: echarts.bg,
                 color: [colors.primaryLight],
                 tooltip: {
@@ -161,10 +238,53 @@ export class LocationsStatsComponent implements AfterViewInit, OnDestroy {
                 ],
                 series: [
                     {
-                        name: 'Score',
+                        name: 'Stopień dopasowania',
                         type: 'bar',
                         barWidth: '60%',
-                        data: [5, 2, 4, 2, 3, -1, -3],
+                        data: [
+                            {
+                                value: 5,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: -1,
+                                itemStyle: {
+                                    color: '#d50000'
+                                },
+                            },
+                            {
+                                value: -2,
+                                itemStyle: {
+                                    color: '#d50000'
+                                },
+                            },
+                            {
+                                value: 3,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: 1,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: 5,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            },
+                            {
+                                value: 4,
+                                itemStyle: {
+                                    color: '#76ff03'
+                                },
+                            }
+                        ],
                     },
                 ],
             };
