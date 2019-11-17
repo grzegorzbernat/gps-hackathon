@@ -1,7 +1,7 @@
 import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
-import {NbSecurityModule, NbRoleProvider} from '@nebular/security';
+import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 import {of as observableOf} from 'rxjs';
 
 import {throwIfAlreadyLoaded} from './module-import-guard';
@@ -10,6 +10,7 @@ import {UserData} from './data/users';
 import {UserService} from './mock/users.service';
 import {MockDataModule} from './mock/mock-data.module';
 import {SmartTableService} from './services/smart-table.service';
+import {LocationsService} from './services/locations.service';
 
 const socialLinks = [
     {
@@ -42,6 +43,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 
 export const NB_CORE_PROVIDERS = [
     SmartTableService,
+    LocationsService,
     ...MockDataModule.forRoot().providers,
     ...DATA_SERVICES,
     ...NbAuthModule.forRoot({

@@ -18,11 +18,43 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Auth',
+    title: 'Zgłoszenia',
+    icon: 'people',
+    children: [
+      {
+        title: 'Lista',
+        link: '/pages/alerts',
+      },
+      {
+        title: 'Moderacja',
+        link: '/pages/alerts/add',
+      },
+    ],
+  },
+  {
+    title: 'Lokalizacje',
+    icon: 'people',
+    children: [
+      {
+        title: 'Lista',
+        link: '/pages/locations',
+      },
+      {
+        title: 'Dodaj',
+        link: '/pages/locations/add',
+      },
+      {
+        title: 'Statystyki',
+        link: '/pages/locations/stats',
+      },
+    ],
+  },
+  {
+    title: 'Autoryzacja',
     icon: 'lock-outline',
     children: [
       {
-        title: 'Login',
+        title: 'Logowanie',
         link: '/auth/login',
       },
       {

@@ -6,6 +6,8 @@ import {PagesComponent} from './pages.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {PagesRoutingModule} from './pages-routing.module';
 import {UsersModule} from './users/users.module';
+import {LocationsModule} from './locations/locations.module';
+import {LocationsStatsModule} from './locations-stats/locations-stats.module';
 
 @NgModule({
     imports: [
@@ -15,6 +17,8 @@ import {UsersModule} from './users/users.module';
         NbListModule,
         DashboardModule,
         UsersModule,
+        LocationsModule,
+        LocationsStatsModule
     ],
     declarations: [
         PagesComponent,

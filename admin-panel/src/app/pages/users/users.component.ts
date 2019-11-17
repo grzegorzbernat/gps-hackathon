@@ -30,23 +30,23 @@ export class UsersComponent {
                 type: 'number',
             },
             firstName: {
-                title: 'First Name',
+                title: 'Imię',
                 type: 'string',
             },
             lastName: {
-                title: 'Last Name',
+                title: 'Nazwisko',
                 type: 'string',
             },
             username: {
-                title: 'Username',
+                title: 'Nazwa użytkownika',
                 type: 'string',
             },
             email: {
-                title: 'E-mail',
+                title: 'Email',
                 type: 'string',
             },
             age: {
-                title: 'Age',
+                title: 'Wiek',
                 type: 'number',
             },
         },

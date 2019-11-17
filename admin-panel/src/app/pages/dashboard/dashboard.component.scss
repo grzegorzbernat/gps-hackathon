@@ -14,3 +14,9 @@
 .table-item {
   height: 40px;
 }
+
+.wrapped {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
