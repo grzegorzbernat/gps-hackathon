@@ -153,13 +153,13 @@ class MONOGO_DB(metaclass=Singleton):
         self.get_location_db().update_one(
             {'_id': ObjectId(_id)},
             { "$inc": {
-                'wozek': data['wozek'],
-                'sluch': data['sluch'],
-                'wzrok': data['wzrok'],
-                'ruch': data['ruch'],
-                'ciaza': data['ciaza'],
-                'dziecko': data['dziecko'],
-                'padaczka,': data['padaczka'] 
+                'wozek': data['wozek'] if 'wozek' in data else 0,
+                'sluch': data['sluch'] if 'sluch' in data else 0,
+                'wzrok': data['wzrok'] if 'wzrok' in data else 0,
+                'ruch': data['ruch'] if 'ruch' in data else 0,
+                'ciaza': data['ciaza'] if 'ciaza' in data else 0,
+                'dziecko': data['dziecko'] if 'dziecko' in data else 0,
+                'padaczka,': data['padaczka'] if 'padaczka' in data else 0,
             } 
             })
         return 'LOCATION UPDATED'
